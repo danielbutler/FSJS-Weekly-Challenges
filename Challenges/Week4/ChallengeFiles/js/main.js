@@ -11,9 +11,9 @@ function openBlock (id) {
     block.style.display = "block";
 
     // TODO: remove the "active" class from all of the li elements inside the menu
-    $(this).siblings().removeClass("active");
-    // TODO: add the "active" class to the li element that contains the link that was clicked
-    $(this).addClass("active");
+    // $(this).siblings().removeClass("active");
+    // // TODO: add the "active" class to the li element that contains the link that was clicked
+    // console.log($(this).addClass("active"));
 }
 
 mainMenu.addEventListener("click", function(){
