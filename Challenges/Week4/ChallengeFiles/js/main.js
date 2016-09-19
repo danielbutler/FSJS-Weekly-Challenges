@@ -1,3 +1,4 @@
+
 var mainMenu = document.getElementById("menu"); //ul with id menu
 
 function openBlock (id) {
