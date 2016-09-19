@@ -1,5 +1,5 @@
-
 var mainMenu = document.getElementById("menu"); //ul with id menu
+var idSelector;
 
 function openBlock (id) {
     var block = document.getElementById(id);
@@ -16,7 +16,13 @@ function openBlock (id) {
     $(this).addClass("active");
 }
 
-mainMenu.addEventListener("click", openBlock);
+mainMenu.addEventListener("click", function(){
+  // idSelector = $('.active').attr("id");
+  // openBlock(idSelector);
+  openBlock("menu_item_about");
+  // openBlock("home");
+  console.log(idSelector);
+});
 
 // TODO: add the "hover" class to the menu items when you hover over them
 
