@@ -1,22 +1,29 @@
 function addPokemon(name) {
-    $(`
-        <li class="poke-card">
-            <h3 class="name">${name}</h3>
-        </li>
-    `).appendTo('#pokemon');
-};
+  $(`
+      <li class="poke-card">
+          <h3 class="name">${name}</h3>
+      </li>
+  `).appendTo('#pokemon');
+}
 
+$(document).ready(function() {
 // 1.)  Use the PokéAPI from http://pokeapi.co along with jQuery's getJSON function to retrieve the first 20 Pokémon.
 // 1.1)  Use the addPokemon function to show each of the Pokémon names that were retrieved.
 //Hint: Learn how to access resources via the documentation http://pokeapi.co/docsv2/#resource-lists
-{
-    "count": 365,
-    "next": "http://pokeapi.co/api/v2/evolution-chain/?limit=20&offset=20",
-    "previous": null,
-    "results": [{
-        "url": "http://pokeapi.co/api/v2/evolution-chain/1/"
-    }]
+var pokeURL = "http://pokeapi.co/api/v2/pokemon/";
+var pokeData = {
+  id : 1
+};
+function testPokemon(data) {
+  // console.log(data.results);
+  var pokeHTML;
+  $.each(data.results, function(i, pokemon) {
+    addPokemon(pokemon.name);
+  });
+  // $('#pokemon').html(pokeHTML);
 }
+
+$.getJSON(pokeURL, pokeData, testPokemon);
 
 // 2.)  Use jQuery to create a click handler for the next and previous buttons.
 // 2.1) Use the "next" and "previous" properties of the pokemon resource object to get the next or previous list of Pokémon.
@@ -30,3 +37,4 @@ function addPokemon(name) {
 
     Be creative, you can style/arrange the detail information however you like!
 */
+}); // end ready
