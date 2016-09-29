@@ -8,17 +8,17 @@ var $pokeCard = $('li.poke-card');
 
 function addPokemon(name, pnumber) {
   $(`
-      <li class="poke-card">
-          <h3 id="${pnumber}" class="name">${name}</h3>
+      <li id="${pnumber}" class="poke-card">
+          <h3 class="name">${name}</h3>
       </li>
   `).appendTo($pokemon);
 }
 
 function makePokemon(name, pnumber, image) {
   $(`
-      <li id="${pnumber}" class="poke-card">
+      <li id="${pnumber}" class="pokeSingle">
           <h3 class="name">${name}</h3>
-          <h3 class="image"><img src="${image}">A picture of ${name}</img></h3>
+          <h3 class="image"><img src="${image}"></img></h3>
       </li>
   `).appendTo($pokemon);
 }
@@ -40,7 +40,6 @@ function disableNext(url) {
 }
 
 function testPokemon(data) {
-  // console.log(data.results);
   $.each(data.results, function(i, pokemon) {
     // 1.1)  Use the addPokemon function to show each of the Pokémon names that were retrieved.
     addPokemon(pokemon.name, i);
@@ -57,10 +56,7 @@ function testPokemon(data) {
 } // end testPokemon function
 
 function runPokemon(data) {
-  // console.log(data.results);
-  $.each(data.results, function(i, pokemon) {
-    makePokemon(pokemon.name, pokemon.id, pokemon.sprites.front_default);
-  }); // end each
+  makePokemon(data.name, data.id, data.sprites.front_default);
 } // end testPokemon function
 
 var pokeStartNum;
@@ -71,10 +67,6 @@ var pokeData = {
 var $prevBtn = $("#previous.btn");
 var $nextBtn = $("#next.btn");
 var isDisabled = true;
-
-function getPokeCards() {
-  console.log("clicking!");
-}
 
 $(document).ready(function() {
 // 1.)  Use the PokéAPI from http://pokeapi.co along with jQuery's getJSON function to retrieve the first 20 Pokémon.
@@ -106,12 +98,15 @@ $nextBtn.click(function(){
     Be creative, you can style/arrange the detail information however you like!
 */
 
-// $("#pokemon").click(function(){
-//   console.log("clicking!");
-// });
+$pokemon.on('click', "li.poke-card", function() {
+  var origPokeURL = pokeURL;
+  $id = $(this).attr("id");
+  $id ++;
+  $pokemon.empty();
+  pokeURL = "http://pokeapi.co/api/v2/pokemon/" + $id + "/";
+  $.getJSON(pokeURL, pokeData, runPokemon);
+});
 
-$('li.poke-card').click(getPokeCards)
+$pokemon.on('click', ".pokeSingle", function() {
   // $pokemon.empty();
-  // pokeURL = "http://pokeapi.co/api/v2/pokemon/" + $('id');
-  // $.getJSON(pokeURL, pokeData, runPokemon);
-;
+});
