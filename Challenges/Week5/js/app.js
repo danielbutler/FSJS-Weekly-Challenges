@@ -72,6 +72,10 @@ var $prevBtn = $("#previous.btn");
 var $nextBtn = $("#next.btn");
 var isDisabled = true;
 
+function getPokeCards() {
+  console.log("clicking!");
+}
+
 $(document).ready(function() {
 // 1.)  Use the PokéAPI from http://pokeapi.co along with jQuery's getJSON function to retrieve the first 20 Pokémon.
 //Hint: Learn how to access resources via the documentation http://pokeapi.co/docsv2/#resource-lists
@@ -102,8 +106,12 @@ $nextBtn.click(function(){
     Be creative, you can style/arrange the detail information however you like!
 */
 
-$("#pokemon.li.poke-card").click(function(){
-  $pokemon.empty();
+// $("#pokemon").click(function(){
+//   console.log("clicking!");
+// });
+
+$('li.poke-card').click(getPokeCards)
+  // $pokemon.empty();
   // pokeURL = "http://pokeapi.co/api/v2/pokemon/" + $('id');
   // $.getJSON(pokeURL, pokeData, runPokemon);
-});
+;
