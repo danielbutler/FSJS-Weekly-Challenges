@@ -3,6 +3,7 @@ var $pokeBtn = $('.btn');
 var prevURL;
 var nextURL;
 var $pokeCard = $('li.poke-card');
+var origPokeURL;
 
 function addPokemon(name, pnumber) {
   $(`
@@ -15,11 +16,11 @@ function addPokemon(name, pnumber) {
 function makePokemon(name, pnumber, image) {
   $(`
       <li class="pokeSingle">
-          <h3 class="name">${name}</h3>
+          <h3 id=${pnumber} class="name">${name}</h3>
           <h3 class="image"><img src="${image}"></img></h3>
+          <button id="return" class="btn">Go Back</button>
       </li>
   `).appendTo($pokemon);
-  $pokeBtn.hide();
 }
 
 function disablePrev(url) {
@@ -98,6 +99,7 @@ $nextBtn.click(function(){
 */
 
 $pokemon.on('click', "li.poke-card", function() {
+  $pokeBtn.hide();
   var origPokeURL = pokeURL;
   $id = $(this).attr("id");
   $id ++;
@@ -109,3 +111,11 @@ $pokemon.on('click', "li.poke-card", function() {
 // $pokemon.on('click', "li.pokeSingle", function() {
 //   $.getJSON(pokeURL, pokeData, testPokemon);
 // });
+
+$pokemon.on('click', '#return', function() {
+  // console.log($('.pokeSingle').attr('id'));
+  // $pokeBtn.show();
+  // $pokemon.empty();
+  //
+  // $.getJSON(pokeURL, pokeData, testPokemon);
+});
