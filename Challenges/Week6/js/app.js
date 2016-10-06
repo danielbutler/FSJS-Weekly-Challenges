@@ -21,6 +21,7 @@ function changeAttribute(attribute, modifier) {
 		Box[attribute] ++;
 	}
 };
+
 //Objects
 var Box = {
 	height: 0,
