@@ -19,11 +19,20 @@ var http = require('http');
  *
  */
 
+// Create a message from the data pulled from
+function createMessage(theRepos) {
+  message = theRepos.name + " last updated: " + theRepos.updated_at + " \n";
+  return message;
+};
+
 // Print out message
- // function printMessage(username, data1, data2) {
- //   message = username + " and " + data1 + " and " + data2;
- //   console.log(message);
- // }
+ function printMessage(data) {
+   var message = "";
+   for (i=1; i < data.length; i++) {
+     message += createMessage(data[i]);
+   }
+   console.log(message);
+ }
 
  // Print out error messages
  function printError(error) {
@@ -33,13 +42,12 @@ var http = require('http');
 function getRepos(username){
   var options = {
     hostname: "api.github.com",
-    path: "/users/:" + username + "/repos",
+    path: "/users/" + username + "/repos",
     headers: {
       'User-Agent': username
     }
   };
   var request = https.get(options, function(response) {
-    console.log(options.path);
     var body = "";
     // Read the data
     response.on('data', (chunk) => {
@@ -50,10 +58,9 @@ function getRepos(username){
         try {
           // Parse the data
           var profile = JSON.parse(body);
-          var str = JSON.stringify(profile);
+          // var str = JSON.stringify(profile);
           // Print the data
-          printMessage(username, profile.id, options.path);
-          // console.log(profile.id);
+          printMessage(profile);
         } catch(error) {
         // Parse Error
           printError(error);
