@@ -5,6 +5,7 @@ var router = require("./router.js");
 
 // this will grab the username from command line
 // console.log(process.argv);
+// argv = ARGument Values
 var user = process.argv.slice(2);
 // console.log(user);
 github.getRepos(user);
