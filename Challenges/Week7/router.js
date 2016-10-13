@@ -20,10 +20,11 @@ function user(request, response) {
   // if url == "/..."
   var username = request.url.replace("/", "");
   if(username.length > 0) {
-    newUsername = fs.readFileSync(username, {encoding: "utf8"});
     response.writeHead(200, commonHeaders);
-    response.write(newUsername);
-    response.write(github.getRepos(username));
+    response.write(username);
+    github.getRepos(username);
+    response.end();
+  }  else {
     response.end();
   }
 

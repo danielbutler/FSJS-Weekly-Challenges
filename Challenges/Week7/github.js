@@ -19,9 +19,14 @@ var http = require('http');
  *
  */
 
+function dateConvert(data) {
+  // return data.valueOf();
+  return "Date Is Dumb";
+};
+
 // Create a message from the data pulled from
 function createMessage(theRepos) {
-  message = theRepos.name + " last updated: " + theRepos.updated_at + " \n";
+  message = theRepos.name + " last updated: " + dateConvert(theRepos.updated_at) + " \n";
   return message;
 };
 
@@ -58,7 +63,6 @@ function getRepos(username){
         try {
           // Parse the data
           var profile = JSON.parse(body);
-          // var str = JSON.stringify(profile);
           // Print the data
           printMessage(profile);
         } catch(error) {
@@ -70,8 +74,10 @@ function getRepos(username){
         printError({message: "There was an error getting the repos for " + username +". (" + http.STATUS_CODES[response.statusCode] + ")"});
       }
     });
-    console.log('Repos for ' + username);
+    // console.log('Repos for ' + username);
   });
+  // Connection Error
+  request.on("error", printError);
 }
 
 module.exports.getRepos = getRepos;
