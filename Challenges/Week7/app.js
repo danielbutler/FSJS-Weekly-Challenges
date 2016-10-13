@@ -5,9 +5,9 @@ var router = require("./router.js");
 
 // this will grab the username from command line
 // console.log(process.argv);
-var users = process.argv.slice(2);
-// console.log(users);
-users.forEach(github.getRepos);
+var user = process.argv.slice(2);
+// console.log(user);
+github.getRepos(user);
 
 var http = require('http');
 http.createServer(function (request, response) {

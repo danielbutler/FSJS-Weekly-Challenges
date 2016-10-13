@@ -32,9 +32,10 @@ function home(request, response) {
 function user(request, response) {
   // if url == "/..."
   var username = request.url.replace("/", "");
+  var message = "";
   if(username.length > 0) {
     response.writeHead(200, commonHeaders);
-    // username.forEach(github.getRepos);
+    response.write(username);
     response.end();
   }
 
