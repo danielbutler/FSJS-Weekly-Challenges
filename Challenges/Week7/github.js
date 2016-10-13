@@ -1,8 +1,5 @@
 //See readme for challenge instructions
 
-var https = require("https");
-var http = require('http');
-
 /*
  * Note about github api: requires User-Agent header to be set. This can be done
  * in Node by passing an options object (rather than a simple url string) as the
@@ -19,14 +16,17 @@ var http = require('http');
  *
  */
 
-function dateConvert(data) {
-  // return data.valueOf();
-  return "Date Is Dumb";
+var http = require('http');
+var https = require('https');
+
+function dateConvert(date) {
+  return date;
 };
 
 // Create a message from the data pulled from
 function createMessage(theRepos) {
-  message = theRepos.name + " last updated: " + dateConvert(theRepos.updated_at) + " \n";
+  message = theRepos.name + " \n";
+  // message = theRepos.name + " last updated: " + dateConvert(theRepos.updated_at) + " \n";
   return message;
 };
 
@@ -74,7 +74,7 @@ function getRepos(username){
         printError({message: "There was an error getting the repos for " + username +". (" + http.STATUS_CODES[response.statusCode] + ")"});
       }
     });
-    // console.log('Repos for ' + username);
+
   });
   // Connection Error
   request.on("error", printError);
