@@ -16,17 +16,16 @@
  *
  */
 
+// function getRepos(username){
+//   console.log('Repos for ' + username);
+// }
+
 var http = require('http');
 var https = require('https');
 
-function dateConvert(date) {
-  return date;
-};
-
 // Create a message from the data pulled from
 function createMessage(theRepos) {
-  message = theRepos.name + " \n";
-  // message = theRepos.name + " last updated: " + dateConvert(theRepos.updated_at) + " \n";
+  message = theRepos.name + " last updated: " + theRepos.updated_at + " \n";
   return message;
 };
 
@@ -44,6 +43,7 @@ function createMessage(theRepos) {
    console.error(error.message);
  }
 
+// this funtion you will use to get the JSON info from github
 function getRepos(username){
   var options = {
     hostname: "api.github.com",
@@ -63,6 +63,8 @@ function getRepos(username){
         try {
           // Parse the data
           var profile = JSON.parse(body);
+          // grabbed the JSON output with the profile to see what variables I could use
+          // console.log(profile);
           // Print the data
           printMessage(profile);
         } catch(error) {
